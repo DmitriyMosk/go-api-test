@@ -4,6 +4,7 @@ import (
 	"fmt"
 	log "github.com/sirupsen/logrus"
 	"net/http"
+	"time"
 )
 
 var logs = log.New()
@@ -26,7 +27,7 @@ func (f *CustomFormatter) Format(entry *log.Entry) ([]byte, error) {
 
 	color := colors[entry.Data["request_type"].(string)]
 	resetColor := colors["default"]
-	logLine = fmt.Sprintf("%s[router]%s\t->\t%s\t\t%s%s\n", color, resetColor, entry.Data["url"], entry.Data["request_type"], resetColor)
+	logLine = fmt.Sprintf("%s[router][%s]%s\t->\t%s\t\t%s%s\n", color, time.Now().Format("2006-01-02 15:04:05"), resetColor, entry.Data["url"], entry.Data["request_type"], resetColor)
 
 	return []byte(logLine), nil
 }
