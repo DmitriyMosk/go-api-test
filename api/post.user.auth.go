@@ -84,7 +84,7 @@ func UserAuth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	net.Respond(w, http.StatusBadRequest, net.Msg{
+	net.Respond(w, http.StatusOk, net.Msg{
 		"jwt":   user.Token.JWT,
 		"email": user.Email,
 	})
